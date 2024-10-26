@@ -1,0 +1,12 @@
+# Ignore all .log files
+*.log
+
+# Ignore the node_modules directory
+gatewayservice/node_modules/
+
+plcservice/node_modules/
+
+tempclean/node_modules/
+
+# Ignore all files in the temp directory
+rawtable_calulation.js
