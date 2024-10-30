@@ -1,5 +1,4 @@
 // Required modules
-const store = require('store2'); // For client-side data storage
 const cors = require('cors'); // For enabling CORS support
 const axios = require('axios'); // For making HTTP requests
 const express = require('express'); // For creating the Express server
