@@ -82,7 +82,7 @@ exports.plcReadData = async function (plcinfo) {
 
                                 if (!datafromplc[plcinfo.name][station]) datafromplc[plcinfo.name][station] = {}
                                 //datafromplc[plcinfo.name][station][key.split("_").slice(1).join("_")] = Number(nodeidread[plcinfo.name][key][1]); //sim
-                                
+
                                 datafromplc[plcinfo.name][station][key.split("_").slice(1).join("_")] = nodeidread[plcinfo.name][key]
                             });
                         });
