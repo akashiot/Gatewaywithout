@@ -1,7 +1,24 @@
 const moment = require('moment-timezone');
 
 function getShift() {
-    const timeStr = moment().tz('Asia/Kolkata').format('HH:mm');
+    const shiftTimes = [
+        { start: '06:30', end: '15:00', shiftId: 1 },
+        { start: '15:00', end: '23:30', shiftId: 2 },
+        { start: '23:30', end: '06:30', shiftId: 3 }
+    ];
+
+    const currentTime = parseTime(moment().tz('Asia/Kolkata').format('HH:mm'));
+
+    for (const shift of shiftTimes) {
+        const startTime = parseTime(shift.start);
+        const endTime = parseTime(shift.end);
+
+        if (isBetween(currentTime, startTime, endTime)) {
+            return shift.shiftId;
+        }
+    }
+
+    return 0; // Return 0 if no shift is matched
 
     function parseTime(timeStr) {
         const [hours, minutes] = timeStr.split(':').map(Number);
@@ -9,29 +26,10 @@ function getShift() {
     }
 
     function isBetween(currentTime, startTime, endTime) {
-        if (startTime < endTime) {
-            return currentTime >= startTime && currentTime < endTime;
-        }
-        return currentTime >= startTime || currentTime < endTime;
-    }
-    const currentTime = parseTime(timeStr);
-    const s1StartTime = parseTime('08:00');
-    const s1EndTime = parseTime('16:00');
-
-    const s2StartTime = parseTime('16:00');
-    const s2EndTime = parseTime('00:00');
-
-    const s3StartTime = parseTime('00:00');
-    const s3EndTime = parseTime('08:00');
-
-    if (isBetween(currentTime, s1StartTime, s1EndTime)) {
-        return 1;
-    } else if (isBetween(currentTime, s2StartTime, s2EndTime)) {
-        return 2;
-    } else if (isBetween(currentTime, s3StartTime, s3EndTime)) {
-        return 3;
-    } else {
-        return 0;
+        return startTime < endTime
+            ? currentTime >= startTime && currentTime < endTime
+            : currentTime >= startTime || currentTime < endTime;
     }
 }
+
 module.exports = { getShift };

@@ -2,7 +2,7 @@
 *.log
 
 # Ignore the node_modules directory
-gatewayservice/node_modules/
+gatewayservice/gatewayservice/node_modules/
 
 plcservice/node_modules/
 

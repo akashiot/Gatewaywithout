@@ -102,12 +102,12 @@ async function valuesReady() {
       // Perform calculations if connection is true
       if (result == true) {
         rawCalc.plcvalues(stn, connection, ele);
-        cycleCalc.rawCycletime(stn, ele);
-        criticalCalc.checkOperation(stn, ele);
-        alertCalc.AlertRawTable(stn, connection, ele);
-        lossCalc.changedLoss(stn, ele);
-        alarmCalc.machineAlarm(stn, ele);
-        toolCalc.toolLife(stn, ele);
+        // cycleCalc.rawCycletime(stn, ele);
+        // criticalCalc.checkOperation(stn, ele);
+        // alertCalc.AlertRawTable(stn, connection, ele);
+        // lossCalc.changedLoss(stn, ele);
+        // alarmCalc.machineAlarm(stn, ele);
+        // toolCalc.toolLife(stn, ele);
       } else if (!res.data || res.data == '') {
         console.log('Check PLC communication!!..');
       }

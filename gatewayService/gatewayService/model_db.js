@@ -2,9 +2,9 @@ const { type } = require("os");
 const { Sequelize } = require("sequelize");
 
 // Define the database connection with correct details
-const dbhero = new Sequelize("GATEWAYDB", "BPATEAL", "TEAL@2024!", {
-  host: '10.79.3.34',
-  port: 3534,
+const db = new Sequelize("hero_kpi", "sa", "admin@123", {
+  host: 'TCLHSRPEDLT0901',
+  port: 1433,
   connectionTimeout: 15000,
   dialect: 'mssql',
   dialectOptions: {
@@ -17,7 +17,7 @@ const dbhero = new Sequelize("GATEWAYDB", "BPATEAL", "TEAL@2024!", {
 });
 
 // Export the dbhero instance for use in other modules
-module.exports = dbhero;
+module.exports = db;
 
 
 
