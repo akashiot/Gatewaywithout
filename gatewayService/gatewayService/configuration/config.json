@@ -1,5 +1,5 @@
 {
     "refresh_rate": "6000",
-    "plc_url": "http://192.168.8.123:3001",
+    "plc_url": "http://172.22.59.2:3001",
     "database_config": "production"
 }

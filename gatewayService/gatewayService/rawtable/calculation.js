@@ -22,22 +22,6 @@ exports.plcvalues = async function (data, Con, stn) {
     var isLossActive = lossTags.includes(true);
 
     // Determine machine status based on input conditions
-    // if (Con == false) {
-    //     machineStatus = 5;
-    // } else if (data?.break === true) {
-    //     machineStatus = 4;
-    // } else if (data?.error_active === true) {
-    //     machineStatus = 0;
-    // } else if (data?.automode_running === true && lossActive === true) {
-    //     machineStatus = 2;
-    // } else if (data?.automode_running === true) {
-    //     machineStatus = 1;
-    // } else if (data?.manualmode_selected === true || data?.automode_selected == true) {
-    //     machineStatus = 3;
-    // } else {
-    //     machineStatus = 3;
-    // }
-
     if (!Con) {
         machineStatus = 5;
     } else if (data?.break) {
@@ -72,28 +56,29 @@ exports.plcvalues = async function (data, Con, stn) {
     // Determine batch code based on shift and variant code
     if (getShift !== shiftId || getVarientCode !== varientCode) {
         batchCode = "B" + timeStamp; // Generate new batch code if shift or variant has changed
-        store.set("batchcode", batchCode) // Store new batch code
+        store.set("batchcode" + stn, batchCode); // Store new batch code
     }
     else if (getShift == shiftId || getVarientCode == varientCode) {
-        var batchCode = store.get("batchcode") // Retrieve existing batch code if no change
+        var batchCode = store.get("batchcode" + stn); // Retrieve existing batch code if no change
     }
+
+    console.log(batchCode) // Log batch code for debugging
+
     store.set("shift" + stn, shiftId);
     store.set("varientCode" + stn, varientCode);
 
     // Set alarm and loss states based on error and loss conditions
-    alarmState = data?.error_active ? "ALM" : " ";
-    lossState = isLossActive ? "LOS" : " ";
+    alarmState = data?.error_active === true ? "ALM" : " ";
+    lossState = isLossActive === true ? "LOS" : " ";
 
     var getMachineStatus = store.get("temp_machineStatus" + stn);
     var getTotal_parts = store.get("temp_Total_parts" + stn);
     var getbatchCode = store.get("setbatchCode" + stn);
 
     if (getMachineStatus !== machineStatus || getTotal_parts !== data.Total_parts || getbatchCode !== batchCode) {
-        //console.log("Inserting", Con, data, timeStamp, Cdate, shiftId, MachineCode, machineStatus, alarmState, lossState, batchCode)
         ctrl.insert(Con, data, timeStamp, Cdate, shiftId, MachineCode, machineStatus, alarmState, lossState, batchCode);
     }
     store.set("temp_machineStatus" + stn, machineStatus);
     store.set("temp_Total_parts" + stn, data.Total_parts);
     store.set("setbatchCode" + stn, batchCode);
 };
-

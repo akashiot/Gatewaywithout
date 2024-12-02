@@ -102,7 +102,7 @@ async function valuesReady() {
       // Perform calculations if connection is true
       if (result == true) {
         rawCalc.plcvalues(stn, connection, ele);
-        // cycleCalc.rawCycletime(stn, ele);
+        cycleCalc.rawCycletime(stn, ele);
         // criticalCalc.checkOperation(stn, ele);
         // alertCalc.AlertRawTable(stn, connection, ele);
         // lossCalc.changedLoss(stn, ele);

@@ -2,8 +2,8 @@ const moment = require('moment-timezone');
 
 function getShift() {
     const shiftTimes = [
-        { start: '06:30', end: '15:00', shiftId: 1 },
-        { start: '15:00', end: '23:30', shiftId: 2 },
+        { start: '06:30', end: '11:00', shiftId: 1 },
+        { start: '11:00', end: '23:30', shiftId: 2 },
         { start: '23:30', end: '06:30', shiftId: 3 }
     ];
 
